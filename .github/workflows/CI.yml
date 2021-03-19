@@ -12,8 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: meson build
+    - run: sed 's/@GNOME_VERSION@/3.38/g' io.elementary.Sdk.json.in > io.elementary.Sdk.json
+    - run: sed -i 's/@SDK_BRANCH@/0.1.0/g' io.elementary.Sdk.json
     - uses: bilelmoussaoui/flatpak-github-actions@master
       with:
         bundle: "io.elementary.Sdk.Nightly"
-        manifest-path: "build/io.elementary.Sdk.json"
+        manifest-path: "io.elementary.Sdk.json"
